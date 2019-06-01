@@ -9,11 +9,14 @@
 			   +--- Detail ---------+-- 4) DetailView  
 			   |	
 			   |
-			   +---- Edit ----------+-- 5) CreateView
+			   +---  List ----------+-- 5) DetailView  
+			   |	
+			   |
+			   +---- Edit ----------+-- 6) CreateView
 					        |
-					        +-- 6) UpdateView  
+					        +-- 7) UpdateView  
 					        |	                              
-					        +-- 7) DeleteView
+					        +-- 8) DeleteView
 					        |
-					        +-- 8) FormView    
+					        +-- 9) FormView    
 					    
