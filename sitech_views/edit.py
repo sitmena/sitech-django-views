@@ -26,7 +26,7 @@ class UpdateView(DjangoUpdateView):
         after_get_object = self.after_get_object()
         if after_get_object:
             return after_get_object
-        return super(BaseUpdateView).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         before_get_object = self.before_get_object()
@@ -36,7 +36,7 @@ class UpdateView(DjangoUpdateView):
         after_get_object = self.after_get_object()
         if after_get_object:
             return after_get_object
-        return super(BaseUpdateView).post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def before_get_object(self):
         pass
