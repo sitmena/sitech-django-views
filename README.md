@@ -6,7 +6,7 @@
 			   | 			+-- 3) TemplateView      
 			   | 
 			   |
-			   +--- Detail ---------+-- 4) DetailView  
+			   +--- Detail ---------+-- 4) ListView  
 			   |	
 			   |
 			   +---  List ----------+-- 5) DetailView  
