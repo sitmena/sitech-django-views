@@ -43,10 +43,7 @@ For example:
 ```python
     from example.Blog.forms import SampleForm
     from example.Blog.models import Post
-    from sitech_views import CreateView, UpdateView, DeleteView
-    
-    from myapp.forms import ContactForm
-from django.views.generic.edit import FormView
+    from sitech_views import FormView, CreateView, UpdateView, DeleteView
 
     class SampleFormView(FormView):
         template_name = 'sample_form.html'
