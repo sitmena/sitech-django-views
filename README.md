@@ -41,8 +41,23 @@ Import and use the views.
 For example:
 
 ```python
+    from example.Blog.forms import SampleForm
     from example.Blog.models import Post
     from sitech_views import CreateView, UpdateView, DeleteView
+    
+    from myapp.forms import ContactForm
+from django.views.generic.edit import FormView
+
+    class SampleFormView(FormView):
+        template_name = 'sample_form.html'
+        form_class = SampleForm
+        success_url = reverse_lazy('successUrl')
+
+        def form_valid(self, form):
+            # This method is called when valid form data has been POSTed.
+            # It should return an HttpResponse.
+            return super().form_valid(form)    
+    
     
     class CreatePost(CreateView):
         model = Post
