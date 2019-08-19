@@ -1,4 +1,6 @@
-
+# Sitech Django Views
+	
+	
 	-- Sitech Views ---+---- Base ----------+-- 1) View
 			   |                    |
 			   | 			+-- 2) RedirectView  
@@ -20,3 +22,11 @@
 					        |
 					        +-- 9) FormView    
 					    
+
+## Installation
+
+Run the [pip](https://pip.pypa.io/en/stable/) command to install the latest version:
+
+```bash
+   pip install git+https://github.com/sitmena/sitech-django-views.git@v1.0
+```
