@@ -6,10 +6,10 @@
 			   | 			+-- 3) TemplateView      
 			   | 
 			   |
-			   +--- Detail ---------+-- 4) ListView  
+			   +--- Detail ---------+-- 4) DetailView
 			   |	
 			   |
-			   +---  List ----------+-- 5) DetailView  
+			   +---  List ----------+-- 5) ListView    
 			   |	
 			   |
 			   +---- Edit ----------+-- 6) CreateView
