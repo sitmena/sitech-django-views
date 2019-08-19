@@ -42,7 +42,14 @@ For example:
 
 ```python
     from example.Blog.models import Post
-    from sitech_views import UpdateView, DeleteView
+    from sitech_views import CreateView, UpdateView, DeleteView
+    
+    class CreatePost(CreateView):
+        model = Post
+        fields = ['title', 'content']
+	template_name = 'create_post.html'
+	success_url = reverse_lazy('postsList')
+
 
     class UpdatePost(UpdateView):
         model = Post
@@ -58,7 +65,7 @@ For example:
 
     class DeletePost(DeleteView):
         model = Post
-        success_url = reverse_lazy('posts-list')
+        success_url = reverse_lazy('postsList')
 	
 	def before_get_object(self):
             pass #called befor get object from db 
