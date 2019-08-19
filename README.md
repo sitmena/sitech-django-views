@@ -36,13 +36,13 @@ Run the [pip](https://pip.pypa.io/en/stable/) command to install the latest vers
 Import and use the views.
 
     from sitech_views import ListView, DetailView
-    from django.urls import reverse_lazy
-    
+
+
 For example:
 
 ```python
     from example.Blog.models import Post
-    from sitech_views import DeleteView
+    from sitech_views import UpdateView, DeleteView
 
     class UpdatePost(UpdateView):
         model = Post
