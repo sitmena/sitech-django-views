@@ -45,6 +45,17 @@ For example:
     from example.Blog.models import Post
     from sitech_views import FormView, CreateView, UpdateView, DeleteView
 
+    #RedirectView
+    class PostCounterRedirectView(RedirectView):
+        permanent = False
+        query_string = True
+        pattern_name = 'post-detail'
+
+        def get_redirect_url(self, *args, **kwargs):
+            post = get_object_or_404(Post, pk=kwargs['pk'])
+            post.update_counter()
+            return super().get_redirect_url(*args, **kwargs)
+
     
     #CreateView
     class CreatePost(CreateView):
@@ -77,6 +88,7 @@ For example:
 
 	def after_get_object(self):
             pass #called after get object from db 
+	    
 	    
     #FormView	    
     class SampleFormView(FormView):
