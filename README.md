@@ -43,7 +43,7 @@ For example:
 ```python
     from example.Blog.forms import SampleForm
     from example.Blog.models import Post
-    from sitech_views import FormView, CreateView, UpdateView, DeleteView
+    from sitech_views import RedirectView, TemplateView, CreateView, UpdateView, DeleteView, FormView
 
     #RedirectView
     class PostCounterRedirectView(RedirectView):
@@ -56,7 +56,16 @@ For example:
             post.update_counter()
             return super().get_redirect_url(*args, **kwargs)
 
-    
+
+    #TemplateView	
+    class HomePageView(TemplateView):
+        template_name = "home.html"
+	
+        def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            context['latest_posts'] = Post.objects.all()[:5]
+            return context
+
     #CreateView
     class CreatePost(CreateView):
         model = Post
