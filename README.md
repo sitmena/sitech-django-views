@@ -45,17 +45,8 @@ For example:
     from example.Blog.models import Post
     from sitech_views import FormView, CreateView, UpdateView, DeleteView
 
-    class SampleFormView(FormView):
-        template_name = 'sample_form.html'
-        form_class = SampleForm
-        success_url = reverse_lazy('successUrl')
-
-        def form_valid(self, form):
-            # This method is called when valid form data has been POSTed.
-            # It should return an HttpResponse.
-            return super().form_valid(form)    
     
-    
+    #CreateView
     class CreatePost(CreateView):
         model = Post
         fields = ['title', 'content']
@@ -63,6 +54,7 @@ For example:
 	success_url = reverse_lazy('postsList')
 
 
+    #UpdateView
     class UpdatePost(UpdateView):
         model = Post
         fields = ['title', 'content']
@@ -75,6 +67,7 @@ For example:
             pass #called after get object from db 
 
 
+    #DeleteView
     class DeletePost(DeleteView):
         model = Post
         success_url = reverse_lazy('postsList')
@@ -84,4 +77,15 @@ For example:
 
 	def after_get_object(self):
             pass #called after get object from db 
+	    
+    #FormView	    
+    class SampleFormView(FormView):
+        template_name = 'sample_form.html'
+        form_class = SampleForm
+        success_url = reverse_lazy('successUrl')
+
+        def form_valid(self, form):
+            # This method is called when valid form data has been POSTed.
+            # It should return an HttpResponse.
+            return super().form_valid(form) 	    
 ```
