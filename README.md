@@ -78,6 +78,21 @@ For example:
 	def after_get_object(self):
             pass #called after get object from db 
 
+    #ListView
+    class PostListView(ListView):
+        model = Post
+        paginate_by = 15
+        form_class = PostSearchForm
+        template_name = 'posts_list.html'
+
+        def get_queryset(self):
+            queryset = super().get_queryset()
+            form = self.get_form()
+            if form and form.is_valid():
+                if form.cleaned_data['term']:
+                    queryset = queryset.filter(title__icontains=form.cleaned_data['term'])
+            return queryset
+
 
     #CreateView
     class CreatePost(CreateView):
