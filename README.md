@@ -43,7 +43,7 @@ For example:
 ```python
     from example.Blog.forms import SampleForm
     from example.Blog.models import Post
-    from sitech_views import RedirectView, TemplateView, CreateView, UpdateView, DeleteView, FormView
+    from sitech_views import RedirectView, TemplateView, DetailView, CreateView, UpdateView, DeleteView, FormView
 
     #RedirectView
     class PostCounterRedirectView(RedirectView):
@@ -65,6 +65,19 @@ For example:
             context = super().get_context_data(**kwargs)
             context['latest_posts'] = Post.objects.all()[:5]
             return context
+	    
+	    
+    #DetailView
+    class PostDetail(DetailView):
+        model = Post
+        template_name = 'update_detail.html'
+	
+	def before_get_object(self):
+            pass #called befor get object from db 
+
+	def after_get_object(self):
+            pass #called after get object from db 
+
 
     #CreateView
     class CreatePost(CreateView):
