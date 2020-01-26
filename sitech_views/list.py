@@ -7,6 +7,10 @@ class ListView(DjangoListView, FormMixin):
     Render some list of objects, set by `self.model` or `self.queryset`.
     `self.queryset` can actually be any iterable of items, not just a queryset.
     """
+    paginate_by_kwarg = 'per-page'
+    paginate_by_limit = None
+    default_paginate_by = None
+    
     def get_form(self, form_class=None):
         """Return an instance of the form to be used in this view."""
         form = None
@@ -28,6 +32,26 @@ class ListView(DjangoListView, FormMixin):
         })
         return kwargs
 
+    def get_paginate_by(self, queryset):
+        if not self.paginate_by:
+            if not self.paginate_by_limit:
+                paginate_by = self.default_paginate_by
+            else:
+                paginate_by_kwarg = self.paginate_by_kwarg
+                paginate_by = self.kwargs.get(paginate_by_kwarg) or self.request.GET.get(paginate_by_kwarg) or self.default_paginate_by
+
+            self.set_paginate_by(paginate_by)
+        return self.paginate_by
+
+    def set_paginate_by(self, value):
+        if value:
+            value = int(value)
+            if isinstance(self.paginate_by_limit, list) and len(self.paginate_by_limit) == 2:
+                if value < self.paginate_by_limit[0]:
+                    value = self.paginate_by_limit[0]
+                elif value > self.paginate_by_limit[1]:
+                    value = self.paginate_by_limit[1]
+        self.paginate_by = value
     
     def paginate_queryset(self, queryset, page_size):
         """Paginate the queryset, if needed."""
@@ -52,5 +76,8 @@ class ListView(DjangoListView, FormMixin):
                 'page_number': page_number,
                 'message': str(e)
             })    
+            
+            
+            
     
 
