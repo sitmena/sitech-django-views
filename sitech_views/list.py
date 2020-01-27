@@ -1,6 +1,7 @@
 from django.views.generic import ListView as DjangoListView, View as DjangoView
 from django.views.generic.edit import FormMixin
-
+from django.http import Http404
+from django.http import JsonResponse
 
 class ListView(DjangoListView, FormMixin):
     """
