@@ -77,7 +77,24 @@ class ListView(DjangoListView, FormMixin):
                 'message': str(e)
             })    
             
-            
-            
-    
+                  
+class BulkActionView(View):
+    """
+    BulkActionView
+    """
+    def get(self, request, action, *args, **kwargs):
+        if hasattr(self, '_' + action):
+            return self.http_method_not_allowed(request, *args, **kwargs)
+        else:
+            raise Http404(_("Page not found"))
+
+    def post(self, request, action, *args, **kwargs):
+        if hasattr(self, '_' + action):
+            pks = request.POST.getlist('pks[]')
+            if pks:
+                action_function = getattr(self, '_' + action)
+                action_function(pks)
+            return JsonResponse({'success': True})
+        else:
+            raise Http404(_("Page not found"))
 
