@@ -3,4 +3,4 @@ from sitech_views.detail import DetailView
 from sitech_views.edit import (
     CreateView, DeleteView, FormView, UpdateView
 )
-from sitech_views.list import ListView
+from sitech_views.list import ListView, BulkActionView
