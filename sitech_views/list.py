@@ -1,4 +1,4 @@
-from django.views.generic import ListView as DjangoListView
+from django.views.generic import ListView as DjangoListView, View as DjangoView
 from django.views.generic.edit import FormMixin
 
 
@@ -78,7 +78,7 @@ class ListView(DjangoListView, FormMixin):
             })    
             
                   
-class BulkActionView(View):
+class BulkActionView(DjangoView):
     """
     BulkActionView
     """
