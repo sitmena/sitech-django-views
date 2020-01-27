@@ -11,16 +11,18 @@
 			   +--- Detail ---------+-- 4) DetailView
 			   |	
 			   |
-			   +---  List ----------+-- 5) ListView    
+			   +---  List ----------+-- 5) ListView  
+			   | 		        |	                              
+			   | 			+-- 6) BulkActionView 
 			   |	
 			   |
-			   +---- Edit ----------+-- 6) CreateView
+			   +---- Edit ----------+-- 7) CreateView
 					        |
-					        +-- 7) UpdateView  
+					        +-- 8) UpdateView  
 					        |	                              
-					        +-- 8) DeleteView
+					        +-- 9) DeleteView
 					        |
-					        +-- 9) FormView    
+					        +-- 10) FormView    
 					    
 
 ## Installation
