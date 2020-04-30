@@ -3,6 +3,7 @@ from django.views.generic.edit import FormMixin
 from django.http import Http404
 from django.http import JsonResponse
 
+
 class ListView(DjangoListView, FormMixin):
     """
     Render some list of objects, set by `self.model` or `self.queryset`.
@@ -11,6 +12,26 @@ class ListView(DjangoListView, FormMixin):
     paginate_by_kwarg = 'per-page'
     paginate_by_limit = None
     default_paginate_by = None
+
+    def get(self, request, *args, **kwargs):
+        form = self.get_form()
+        self.object_list = self.get_queryset(form)
+        allow_empty = self.get_allow_empty()
+
+        if not allow_empty:
+            # When pagination is enabled and object_list is a queryset,
+            # it's better to do a cheap query than to load the unpaginated
+            # queryset in memory.
+            if self.get_paginate_by(self.object_list) is not None and hasattr(self.object_list, 'exists'):
+                is_empty = not self.object_list.exists()
+            else:
+                is_empty = not self.object_list
+            if is_empty:
+                raise Http404(_('Empty list and “%(class_name)s.allow_empty” is False.') % {
+                    'class_name': self.__class__.__name__,
+                })
+        context = self.get_context_data(form=form)
+        return self.render_to_response(context)
     
     def get_form(self, form_class=None):
         """Return an instance of the form to be used in this view."""
@@ -53,6 +74,9 @@ class ListView(DjangoListView, FormMixin):
                 elif value > self.paginate_by_limit[1]:
                     value = self.paginate_by_limit[1]
         self.paginate_by = value
+
+    def get_queryset(self, form=None):
+        return super().get_queryset()
     
     def paginate_queryset(self, queryset, page_size):
         """Paginate the queryset, if needed."""
