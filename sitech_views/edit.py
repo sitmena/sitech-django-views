@@ -43,6 +43,11 @@ class UpdateView(DjangoUpdateView):
 
     def after_get_object(self):
         pass
+    
+    def get_object(self, queryset=None):
+        if hasattr(self, 'object'):
+            return self.object
+        return super().get_object(queryset)
 
 
 class DeleteView(DjangoDeleteView):
@@ -71,3 +76,9 @@ class DeleteView(DjangoDeleteView):
 
     def after_get_object(self):
         pass
+    
+    def get_object(self, queryset=None):
+        if hasattr(self, 'object'):
+            return self.object
+        return super().get_object(queryset)    
+        
